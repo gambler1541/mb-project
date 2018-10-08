@@ -26,9 +26,12 @@ secrets = json.load(open(os.path.join(SECRETS_DIR, 'base.json')))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = secrets['SECRET_KEY']
 
+AUTH_USER_MODEL = 'members.User'
 # Application definition
 
 INSTALLED_APPS = [
+    'members',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
