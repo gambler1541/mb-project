@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 django = "*"
+uwsgi = "*"
 
 [dev-packages]
 awsebcli = "*"
