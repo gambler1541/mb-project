@@ -1,0 +1,9 @@
+FROM        python:3.6.5-slim
+MAINTAINER  pmb.dev3@gmail.com
+
+RUN         apt -y update && apt -y dist-upgrade
+
+# 로컬의 requirements.txt파일을 /srv에 복사 후 pip install 실행
+# (build하는 환경에 requirements.txt가 있어야 함!)
+COPY        ./requirements.txt  /srv/
+RUN         pip install -r /srv/requirements.txt

@@ -1,0 +1,7 @@
+FROM            mb-project:base
+MAINTAINER      pmb.dev3@gmail.com
+
+ENV             BUILD_MODE              local
+ENV             DJANGO_SETTINGS_MODULE  config.settings.${BUILD_MODE}
+
+COPY            .       /srv/project
