@@ -14,8 +14,10 @@ RUN             pip install -r /srv/requirements.txt
 ENV             BUILD_MODE              production
 ENV             DJANGO_SETTINGS_MODULE  config.settings.${BUILD_MODE}
 
-
+# django log
+RUN             mkdir   /var/log/django
 COPY            .   /srv/project
+
 
 # Nginx 설정파일들 복사 및 enabled로 링크
 RUN             cp -f   /srv/project/.config/${BUILD_MODE}/nginx.conf \
