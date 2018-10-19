@@ -18,6 +18,10 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 SECRET_DIR = os.path.join(ROOT_DIR, '.secrets')
 secrets = json.load(open(os.path.join(SECRET_DIR, 'base.json')))
 
+# Admin
+ADMIN_LOGIN = 'admin'
+ADMIN_PASSWORD = 'pbkdf2_sha256$120000$ui28pcptP1a3$jFi2ojDDElYunm4Lmh4URiMwmQZTpl3Mt+0/M/4nLXQ='
+
 
 # STATIC
 STATIC_URL = '/static/'
@@ -30,7 +34,13 @@ MEDIA_ROOT = os.path.join(ROOT_DIR, '.media')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = secrets['SECRET_KEY']
 
+# Auth
+
 AUTH_USER_MODEL = 'members.User'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'members.backends.SettingsBackend',
+]
 # Application definition
 
 INSTALLED_APPS = [
