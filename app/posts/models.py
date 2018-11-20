@@ -20,6 +20,7 @@ class Post(models.Model):
     modified_at = models.DateTimeField(auto_now=True,)
 
     class Meta:
+        ordering = ['-created_at']
         verbose_name = '포스트'
         verbose_name_plural = f'{verbose_name} 목록'
 
