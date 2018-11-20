@@ -1,10 +1,15 @@
 from django import forms
-from django.contrib.auth import get_user_model
-
+from django.contrib.auth import get_user_model, authenticate
 
 User = get_user_model()
 
 class LoginForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 이 Form instance에 주어진 데이터가 유효하면
+        # authenticate에서 리턴된 User객체를 채울 속성
+        self._user = None
+
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -19,6 +24,23 @@ class LoginForm(forms.Form):
             }
         )
     )
+
+    def clean(self):
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['password']
+        user = authenticate(username = username, password = password)
+        if user is None:
+            raise forms.ValidationError('로그인 정보를 확인하세요.')
+        self._user = user
+
+    @property
+    def user(self):
+        # 유효성 검증을 실행했을 때(is_valid())
+        #  만약 필드나 폼에서 유효하지 않은 항목이 있다면
+        #  이 부분에 추가됨
+        if self.errors:
+            raise ValueError('폼의 데이터 유효성 검증에 실패하였습니다.')
+        return self._user
 
 class SignupForm(forms.Form):
     username = forms.CharField(

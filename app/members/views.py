@@ -8,26 +8,23 @@ from .forms import LoginForm,SignupForm
 User = get_user_model()
 
 def login_view(request):
+    context = {}
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username = username, password=password)
-        if user is not None:
-            login(request, user)
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            # 인증 성공시
+            login(request, form.user)
             return redirect('posts:post_list')
-        else:
-            return HttpResponse('ID 또는 Password를 확인하십시오')
     else:
         form = LoginForm()
-        context = {
-            'form' : form
-        }
-        return render(request, 'members/login.html', context)
+    context['form'] = form
+    return render(request, 'members/login.html', context)
+
 
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('posts:post_list')
+    return redirect('posts:post_list')
 
 def signup_view(request):
     # render하는 경우
