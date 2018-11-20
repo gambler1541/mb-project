@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Create your views here.
@@ -16,6 +17,7 @@ def post_list(request):
     return render(request, 'posts/post_list.html', context)
 
 
+@login_required
 def post_create(request):
     # 1. posts/post_create.html 구현
     # form 구현
@@ -27,24 +29,18 @@ def post_create(request):
     #3. render를 적절히 사용해서 해당 템플릿을 return
     #4. base.html의 nav부분에 '+ Add Post'텍스트를 갖는 a링크 추가
     #   {% url %] 태그를 사용해서 포스트 생성 으로 링크 걸어주기
-    if not request.user.is_authenticated:
-        return redirect('posts:post_list')
+    context = {}
     if request.method == 'POST':
         # Post.objects.create(
         #     author=User.objects.first(),
         #     photo = request.FILES['photo']
         # )
         # return redirect('posts:post_list')
-        post = Post(
-            author=request.user,
-            photo=request.FILES['photo'],
-        )
-        post.save()
+        form = PostCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save(author=request.user)
         return redirect('posts:post_list')
     else:
-        # GET요청의 경우, 빈 Form인스턴스를 context에 담아서 전달
         form = PostCreateForm()
-        context = {
-            'form' : form,
-        }
-        return render(request, 'posts/post_create.html', context)
+    context['form'] = form
+    return render(request, 'posts/post_create.html', context)

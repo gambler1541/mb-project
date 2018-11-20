@@ -49,6 +49,9 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
+
+LOGIN_URL = 'members:login_view'
+
 # Application definition
 INSTALLED_APPS = [
     'members',

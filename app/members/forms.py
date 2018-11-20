@@ -68,6 +68,15 @@ class SignupForm(forms.Form):
         )
     )
 
+    img_profile = forms.ImageField(
+        widget=forms.FileInput(
+            attrs={
+                'class':'form-control-file',
+            }
+        )
+    )
+
+
     def clean_username(self):
         # username이 유일한지 검사
         value = self.cleaned_data['username']
@@ -92,6 +101,7 @@ class SignupForm(forms.Form):
         user = User.objects.create_user(
             username=self.cleaned_data['username'],
             password=self.cleaned_data['password2'],
+            img_profile=self.cleaned_data['img_profile'],
         )
         return user
     #

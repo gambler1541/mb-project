@@ -14,6 +14,11 @@ def login_view(request):
         if form.is_valid():
             # 인증 성공시
             login(request, form.user)
+            # GET parameter에 'next'가 전달되었다면
+            # 해당 키의 값으로 redirect
+            next_path = request.GET.get('next')
+            if next_path:
+                return redirect(next_path)
             return redirect('posts:post_list')
     else:
         form = LoginForm()
@@ -59,7 +64,7 @@ def signup_view(request):
     if request.method == 'POST':
         # POST로 전달된 데이터를 확인
         # 올바르다면 User를 생성하고 post-list화면으로 이동
-        form = SignupForm(request.POST)
+        form = SignupForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
