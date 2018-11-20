@@ -50,10 +50,18 @@ class SignupForm(forms.Form):
             raise forms.ValidationError('이미 있는 이름입니다.')
         return value
 
-    def clean(self):
-        # password1, password2가 일치하는지 검사
-        super().clean()
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
+    def clean_password2(self):
+        password1 = self.cleaned_data['password1']
+        password2 = self.cleaned_data['password2']
+
         if password1 != password2:
-            raise forms.ValidationError('비밀번호를 확인하세요')
+            raise forms.ValidationError('패스워드를 확인해 주세요.')
+        return password2
+    #
+    # def clean(self):
+    #     # password1, password2가 일치하는지 검사
+    #     super().clean()
+    #     password1 = self.cleaned_data.get('password1')
+    #     password2 = self.cleaned_data.get('password2')
+    #     if password1 != password2:
+    #         raise forms.ValidationError('비밀번호를 확인하세요')
