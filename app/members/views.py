@@ -64,10 +64,7 @@ def signup_view(request):
         # 올바르다면 User를 생성하고 post-list화면으로 이동
         form = SignupForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password1'],
-            )
+            user = form.save()
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('posts:post_list')
     # GET요청시 또는 POST로 전달된 데이터가 올바르지 않을 경우
