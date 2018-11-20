@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <h2>글 쓰기</h2>
+</div>
+    <form action="" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-gorup">
+        <label for="{{  field.id_for_label }}">
+            {{ field.label }}
+        </label>
+        {{  field }}
+    </div>
+    {% endfor %}
+    <button class="btn btn-primary btn-block">업로드</button>
+    </form>
+{% endblock %}
+
+{#<div class="form-group">#}
+{#    <label for="id-photo">사진 첨부</label>#}
+{#    <input type="file" id="id-photo" class="form-control-file" name="P">#}
+{#</div>#}

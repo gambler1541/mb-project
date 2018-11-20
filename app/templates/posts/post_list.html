@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{%  block content %}
+<div>
+    {% for post in posts %}
+    <!--이 div가 lg(width >= 992일 때, 4/12의 크기를 가지며 4/12 위치를 기준으로 시작 -->
+    <div class="col col-lg-4 offset-lg-4 mb-4">
+        <!--Card모양에 대해 미리 정의된 클래스-->
+        <div class="card">
+            <!--작성자 정보를 나타낼 header부분-->
+            <div class="card-header">
+                {{  post.author }}
+            </div>
+            <!--Card의 본문 부분-->
+            <div class="card-body">
+                <img src="{{ post.photo.url }}" alt="" class="card-img-top">
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Instagram</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+</head>
+<body>
+    <div id="wrap">
+        <!--네비게이션 바-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!--좌측 제목-->
+        <a href="#" class="navbar-brand">Instagram</a>
+        <!--검색 Form-->
+        <form action="#" class="form-inline ml-md-auto">
+            <input type="text" class="form-control" placeholder="검색">
+        </form>
+        <!--우측 3개 메뉴 버튼-->
+        <ul class="navbar-nav ml-md-auto">
+            <!--글 추가-->
+            <li class="nav-item mr-sm-1">
+                <a href="{% url 'posts:post_create' %}" class="btn btn-outline-primary">+ ADD</a>
+            </li>
+            <li class="nav-item mr-sm-1">
+                <a href="#" class="btn btn-outline-secondary">Explore</a>
+            </li>
+            <li class="nav-item mr-sm-1">
+                <a href="#" class="btn btn-outline-secondary">Favorites</a>
+            </li>
+            <li class="nav-item mr-sm-1">
+                <a href="" class="btn btn-outline-secondary">
+                    Profile
+                    {%  if user.is_authenticated %}
+                        ({{ user.username }})
+                    {% endif %}
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item mr-sm-1">
+                <form action="{% url 'members:logout_view' %}" method="POST">
+                {% csrf_token %}
+                    <button class="btn btn-outline-secondary"
+                            type="submit">Logout</button>
+                </form>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a href="{% url 'members:login_view' %}" class="btn btn-outline-secondary mr-sm-1">Login</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'members:signup_view' %}" class="btn btn-outline-secondary mr-sm-1">SignUp</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    </div>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

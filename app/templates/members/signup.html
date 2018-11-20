@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+    <h2 class="text-center">회원가입</h2>
+    <form action="" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+        <label for="{{ field.id_for_label }}">
+            {{ field.label }}
+        </label>
+        {{ field }}
+    </div>
+    {% endfor %}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">회원가입</button>
+    </form>
+</div>
+{% endblock %}
