@@ -3,14 +3,28 @@
 {% block content %}
 <div class="col col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
     <h2 class="text-center">회원가입</h2>
-    <form action="" method="POST">
+    <form action="" method="POST" class="was-validated">
     {% csrf_token %}
+
+    <!-- Form자체의 Error들을 출력 -->
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Form이 가진 field들을 순회 -->
     {% for field in form %}
     <div class="form-group">
         <label for="{{ field.id_for_label }}">
             {{ field.label }}
         </label>
         {{ field }}
+    <!-- 각 Field가 가진 Error들을 input밑에 출력 -->
+        {% for error in field.errors %}
+            <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %}
+
     </div>
     {% endfor %}
     <button class="btn btn-lg btn-primary btn-block" type="submit">회원가입</button>
