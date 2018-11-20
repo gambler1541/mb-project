@@ -1,8 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
-from config.settings.base import AUTH_USER_MODEL
 
-User = AUTH_USER_MODEL
+
+User = get_user_model()
 
 
 class Post(models.Model):

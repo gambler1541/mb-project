@@ -1,15 +1,17 @@
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate, logout, get_user_model
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from .forms import LoginForm,SignupForm
 
+User = get_user_model()
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username = username, passwrod=password)
+        user = authenticate(username = username, password=password)
         if user is not None:
             login(request, user)
             return redirect('posts:post_list')
@@ -62,6 +64,11 @@ def signup_view(request):
         # 올바르다면 User를 생성하고 post-list화면으로 이동
         form = SignupForm(request.POST)
         if form.is_valid():
+            user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password1'],
+            )
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('posts:post_list')
     # GET요청시 또는 POST로 전달된 데이터가 올바르지 않을 경우
     #   signup.html에

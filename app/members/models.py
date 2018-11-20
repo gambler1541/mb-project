@@ -2,6 +2,10 @@ from django.contrib.auth.models import AbstractUser, UserManager as DjangoUserMa
 from django.db import models
 
 
+__all__ = (
+    'User',
+)
+
 class UserManager(DjangoUserManager):
     pass
 
