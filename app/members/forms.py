@@ -1,5 +1,8 @@
 from django import forms
+from django.contrib.auth import get_user_model
 
+
+User = get_user_model()
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -39,3 +42,18 @@ class SignupForm(forms.Form):
             }
         )
     )
+
+    def clean_username(self):
+        # username이 유일한지 검사
+        value = self.cleaned_data['username']
+        if User.objects.filter(username=value).exists:
+            raise forms.ValidationError('이미 있는 이름입니다.')
+        return value
+
+    def clean(self):
+        # password1, password2가 일치하는지 검사
+        super().clean()
+        password1 = self.cleaned_data.get['password1']
+        password2 = self.cleaned_data.get['password2']
+        if password1 != password2:
+            raise forms.ValidationError('비밀번호를 확인하세요')

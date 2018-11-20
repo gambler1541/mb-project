@@ -14,7 +14,7 @@ class UserAdmin(BaseUserAdmin):
         }),
         ('개인정보', {
             'fields': (
-                'profile_img',
+                'img_profile',
 
             ),
         }),
