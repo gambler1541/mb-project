@@ -40,3 +40,22 @@ class PostCreateForm(forms.Form):
                 content = comment_content,
             )
         return post
+
+
+class CommentCreateForm(forms.Form):
+    content = forms.CharField(
+        label='',
+        widget=forms.TextInput(
+            attrs={
+                'rows': 2,
+                'class':'form-control mt',
+            }
+        )
+    )
+
+    def save(self, post, **kwargs):
+        content = self.cleaned_data['content']
+        return post.comments.create(
+            content=content,
+            **kwargs
+        )
