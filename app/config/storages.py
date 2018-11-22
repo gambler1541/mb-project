@@ -12,5 +12,5 @@ class S3StaticStorage(S3Boto3Storage):
 
 
 class S3DefaultStorage(S3Boto3Storage):
-    default_acl = 'public-read'
+    default_acl = 'private'
     location = 'media'

@@ -28,4 +28,10 @@ class PostCreateForm(forms.Form):
             photo=self.cleaned_data['photo'],
             **kwargs,
         )
+        # 만약 comment항목이 있다면 (선택적)
+        # 생성한 Post에 연결되는 Comment를 생성
+        # author = request.user
+        # post=post가 되도록
+
+        # 2. post_list에서 각 Post에 댓글 목록을 출력
         return post
