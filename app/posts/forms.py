@@ -33,5 +33,10 @@ class PostCreateForm(forms.Form):
         # author = request.user
         # post=post가 되도록
 
-        # 2. post_list에서 각 Post에 댓글 목록을 출력
+        comment_content = self.cleaned_data.get('comment')
+        if comment_content:
+            post.comments.create(
+                author = post.author,
+                content = comment_content,
+            )
         return post

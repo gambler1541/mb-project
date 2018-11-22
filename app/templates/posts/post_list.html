@@ -14,6 +14,22 @@
             <!--Card의 본문 부분-->
             <div class="card-body">
                 <img src="{{ post.photo.url }}" alt="" class="card-img-top">
+                <ul class="list-unstyled">
+                    {% for comment in post.comments.all %}
+                        <li>
+                            <strong>{{ comment.author }}</strong>
+                            <span>{{ comment.content }}</span>
+                        </li>
+                    {% endfor %}
+
+                    {% if user.is_authenticated %}
+                    <form action="{% url 'posts:comment_create' post_pk=post.pk %}" method="POST">
+                        {% csrf_token %}
+                        <textarea name="content" id="" cols="30" rows="2" class="form-control mt-1"></textarea>
+                        <button class="btn btn-primary btn-block" type="submit">작성</button>
+                    </form>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </div>
