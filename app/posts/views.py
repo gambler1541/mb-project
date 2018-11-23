@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from .models import Post, Comment
-from .forms import PostCreateForm, CommentForm
+from .forms import PostCreateForm, CommentForm, PostForm
 
 def post_list(request):
     posts = Post.objects.all()
@@ -37,12 +37,14 @@ def post_create(request):
         #     photo = request.FILES['photo']
         # )
         # return redirect('posts:post_list')
-        form = PostCreateForm(request.POST, request.FILES)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save(author=request.user)
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
         return redirect('posts:post_list')
     else:
-        form = PostCreateForm()
+        form = PostForm()
     context['form'] = form
     return render(request, 'posts/post_create.html', context)
 

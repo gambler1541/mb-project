@@ -62,6 +62,32 @@ class CommentCreateForm(forms.Form):
             **kwargs
         )
 
+class PostForm(forms.ModelForm):
+    # Post에는 없는 필드를 추가(다른 모델)
+    comment = forms.CharField(
+        label='내용',
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                'class':'form-control'
+            }
+        )
+    )
+
+    class Meta:
+        model = Post
+        fields = [
+            'photo',
+
+        ]
+        widgets = {
+            'photo': forms.ClearableFileInput(
+                attrs={
+                    'class': 'form-control-file',
+                }
+            )
+        }
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -71,7 +97,7 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'content' : forms.Textarea(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control mt-1',
                     'rows': 2,
                 }
             )
