@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="col col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+<div class="col col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 ">
     <h2 class="text-center">로그인</h2>
     <form action="" method="POST">
     {% csrf_token %}
@@ -13,7 +13,6 @@
         {{ field }}
     </div>
     {% endfor %}
-
     {% for error in form.non_field_errors %}
     <small class="form-text text-center text-danger font-weight-bold">{{ error }}</small>
     {% endfor %}
