@@ -61,8 +61,4 @@ def comment_create(request, post_pk):
             comment.author = request.user
             comment.save()
 
-            p = re.compile(r'#(?P<tag>\w+)')
-            tags = [HashTag.objects.get_or_create(name=name)[0] for name in re.findall(p, comment.content)]
-            comment.tags.set(tags)
-
             return redirect('posts:post_list')
