@@ -18,7 +18,7 @@
                     {% for comment in post.comments.all %}
                         <li>
                             <strong>{{ comment.author }}</strong>
-                            <span>{{ comment.content }}</span>
+                            <span>{{ comment.html|safe }}</span>
                         </li>
                     {% endfor %}
 
