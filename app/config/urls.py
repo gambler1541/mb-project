@@ -19,12 +19,14 @@ from django.urls import path, include
 from django.views.generic import RedirectView
 
 from config.settings import base
+from posts.views import tag_post_list
 
 urlpatterns = [
     path('', RedirectView.as_view(pattern_name='posts:post_list'), name='index'),
     path('admin/', admin.site.urls),
     path('posts/', include('posts.urls')),
     path('members/', include('members.urls')),
+    path('explore/tags/<str:tag_name>/',tag_post_list,name='tag_post_list'),
 
 ]
 

@@ -62,3 +62,14 @@ def comment_create(request, post_pk):
             comment.save()
 
             return redirect('posts:post_list')
+
+def tag_post_list(request, tag_name):
+    # Post중, 자신에게 속한 Comment가 가진 HashTag목록 중
+    #   Post목록을 posts변수에 할당
+    # context에 담아서 리턴 render
+    # HTML: /posts/tag_post_list.html
+    posts = Post.objects.filter(comments__tags__name=tag_name)
+    context = {
+        'posts' : posts
+    }
+    return render(request, 'posts/tag_post_list.html', context)
