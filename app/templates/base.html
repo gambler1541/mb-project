@@ -17,8 +17,8 @@
         <!--좌측 제목-->
         <a href="{% url 'posts:post_list' %}" class="navbar-brand">Instagram</a>
         <!--검색 Form-->
-        <form action="#" class="form-inline ml-md-auto">
-            <input type="text" class="form-control" placeholder="검색">
+        <form action="{% url 'posts:tag_search' %}" class="form-inline ml-md-auto">
+            <input type="text" name="search-keyword" class="form-control" placeholder="검색">
         </form>
         <!--우측 3개 메뉴 버튼-->
         <ul class="navbar-nav ml-md-auto">

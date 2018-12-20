@@ -73,3 +73,17 @@ def tag_post_list(request, tag_name):
         'posts' : posts
     }
     return render(request, 'posts/tag_post_list.html', context)
+
+
+def tag_search(request):
+    '''
+    1. request.GET으로 전달된
+        search_keyword값을 적절히 활용해서
+        위의 tag_post_list view로 redirect
+    URL: '/posts/tag-search/'
+    URL Name : 'posts:tag-search'
+    Template: 없음
+    '''
+    search_keyword = request.GET.get('search-keyword')
+    substitued_keyword = re.sub(r'#|\s+', '', search_keyword)
+    return redirect('tag_post_list', substitued_keyword)
