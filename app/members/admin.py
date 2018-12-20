@@ -14,8 +14,12 @@ class UserAdmin(BaseUserAdmin):
         }),
         ('개인정보', {
             'fields': (
+                'email',
+                'first_name',
+                'last_name',
+                'site',
+                'introduce',
                 'img_profile',
-
             ),
         }),
     )

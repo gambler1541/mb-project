@@ -112,3 +112,15 @@ class SignupForm(forms.Form):
     #     password2 = self.cleaned_data.get('password2')
     #     if password1 != password2:
     #         raise forms.ValidationError('비밀번호를 확인하세요')
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'email',
+            'last_name',
+            'first_name',
+            'img_profile',
+            'site',
+            'introduce',
+        ]
