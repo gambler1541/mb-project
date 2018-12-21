@@ -82,8 +82,9 @@ def signup_view(request):
 
 @login_required
 def profile(request):
-    form = UserProfileForm(instance=request.user)
-    context = {
-        'form' : form
-    }
+    if request.method == 'POST':
+        form = UserProfileForm(instance=request.user)
+        context = {
+            'form' : form
+        }
     return render(request, 'members/profile.html', context)
