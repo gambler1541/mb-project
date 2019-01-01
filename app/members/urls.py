@@ -8,5 +8,6 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout_view'),
     path('signup/', views.signup_view, name='signup_view'),
     path('profile/', views.profile, name='profile'),
+    path('facebook-login/', views.facebook_login, name='facebook_login'),
 
 ]

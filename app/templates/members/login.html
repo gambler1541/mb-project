@@ -17,6 +17,10 @@
     <small class="form-text text-center text-danger font-weight-bold">{{ error }}</small>
     {% endfor %}
     <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+    <a href="https://www.facebook.com/v3.2/dialog/oauth?
+            client_id=2270191476551895
+            &redirect_uri=http://localhost:8000/{% url 'members:facebook_login' %}"
+       class="btn btn-lg btn-info btn-block"> FaceBook Login</a>
     </form>
 </div>
 {% endblock %}
