@@ -100,7 +100,7 @@ def facebook_login(request):
     params  = {
         'client_id': '2270191476551895',
         'redirect_uri': 'http://localhost:8000/members/facebook-login/',
-        'client_secret': '4cc612f52d4d17901ee7ffd7380a4520',
+        # 'client_secret':
         'code': code
 
     }
