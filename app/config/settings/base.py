@@ -43,9 +43,11 @@ SECRET_KEY = secrets['SECRET_KEY']
 # Auth
 AUTH_USER_MODEL = 'members.User'
 
+# authenticate() 함수 호출 시 사용할 백엔드 목록
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'members.backends.SettingsBackend',
+    'members.backends.FacebookBackend',
 ]
 
 # static
