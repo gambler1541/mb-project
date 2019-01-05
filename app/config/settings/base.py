@@ -21,6 +21,8 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 SECRET_DIR = os.path.join(ROOT_DIR, '.secrets')
 secrets = json.load(open(os.path.join(SECRET_DIR, 'base.json')))
+FACEBOOK_APP_ID = secrets['FACEBOOK_APP_ID']
+FACEBOOK_APP_SECRET = secrets['FACEBOOK_APP_SECRET']
 
 # Admin
 ADMIN_LOGIN = 'admin'

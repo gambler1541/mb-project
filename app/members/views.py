@@ -1,13 +1,11 @@
 import imghdr
-import io
-import json
 
 import requests
-from django.contrib.auth import login, authenticate, logout, get_user_model
+from django.conf import settings
+from django.contrib.auth import login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from .forms import LoginForm, SignupForm, UserProfileForm
@@ -103,9 +101,9 @@ def facebook_login(request):
     api_me = f'{api_base}/me'
     code = request.GET['code']
     params  = {
-        'client_id': '2270191476551895',
+        'client_id': settings.FACEBOOK_APP_ID,
         'redirect_uri': 'http://localhost:8000/members/facebook-login/',
-        # 'client_secret': {secret}
+        'client_secret': settings.FACEBOOK_APP_SECRET,
         'code': code
 
     }
