@@ -41,9 +41,9 @@ class FacebookBackend:
         api_me = f'{api_base}/me'
         code = request.GET['code']
         params = {
-            'client_id': settings.FACEBOOK_APP_ID,
+            'client_id': settings.base.FACEBOOK_APP_ID,
             'redirect_uri': 'http://localhost:8000/members/facebook-login/',
-            'client_secret': settings.FACEBOOK_APP_SECRET,
+            'client_secret': settings.base.FACEBOOK_APP_SECRET,
             'code': code
 
         }
